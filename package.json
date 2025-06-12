@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "commit": "cz"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/sergiorsoares82/protosfarm-backend/issues"
   },
-  "homepage": "https://github.com/sergiorsoares82/protosfarm-backend#readme"
+  "homepage": "https://github.com/sergiorsoares82/protosfarm-backend#readme",
+  "devDependencies": {
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0"
+  }
 }
