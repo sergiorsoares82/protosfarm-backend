@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/server.ts",
-    "build": "tsup src/server.ts",
+    "build": "tsup src/server.ts --dts --format esm,cjs --out-dir dist --clean",
     "start": "node dist/server.js",
     "commit": "cz",
     "commit:lint": "commitlint",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@types/express": "^5.0.3",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
