@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
+    "dev": "tsx src/server.ts",
+    "build": "tsup src/server.ts",
+    "start": "node dist/server.js",
     "commit": "cz",
     "commit:lint": "commitlint",
     "prepare": "husky"
@@ -29,6 +31,8 @@
     "husky": "^9.1.7"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3"
   }
 }
