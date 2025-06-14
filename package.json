@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/server.ts",
-    "build": "tsup src/server.ts --dts --format esm,cjs --out-dir dist --clean",
+    "build": "npm install && tsup src/server.ts --dts --format esm,cjs --out-dir dist --clean",
     "start": "node dist/server.js",
     "commit": "cz",
     "commit:lint": "commitlint",
