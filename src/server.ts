@@ -1,6 +1,6 @@
-import type { Response } from 'express';
-import type { Request } from 'express';
+import type { Request, Response } from 'express';
 import express from 'express';
+import router from './routes';
 // import prisma from './infra/database.js';
 
 const app = express();
@@ -22,9 +22,7 @@ const PORT = process.env.PORT || 3000;
 
 // checkDatabaseConnection();
 
-app.get('/api/v1/status', (req, res) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
-});
+app.use(router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
