@@ -1,5 +1,5 @@
 import express from 'express';
-import statusRoutes from './statusRoutes';
+import statusRoutes from './statusRoutes.js';
 
 const apiV1Router = express.Router();
 

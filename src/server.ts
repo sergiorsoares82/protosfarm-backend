@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import express from 'express';
-import router from './routes';
+import router from './routes/index.js';
 // import prisma from './infra/database.js';
 
 const app = express();
