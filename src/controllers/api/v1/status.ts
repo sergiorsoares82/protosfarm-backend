@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import prisma from '../../../infra/database';
+import prisma from '../../../infra/database.js';
 
 const getStatus = async (req: Request, res: Response) => {
   const updatedAt = new Date();
