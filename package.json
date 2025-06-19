@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "npm run services:up && tsx watch src/server.ts",
+    "services:up": "docker compose -f src/infra/compose.yaml up -d",
+    "services:stop": "docker compose -f src/infra/compose.yaml stop",
+    "services:down": "docker compose -f src/infra/compose.yaml down",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint .",
