@@ -1,26 +1,9 @@
 import type { Request, Response } from 'express';
 import express from 'express';
 import router from './routes/index.js';
-// import prisma from './infra/database.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// async function checkDatabaseConnection() {
-//   try {
-//     await prisma.$connect();
-//     const databaseVersionResult = await prisma.$queryRaw<
-//       { server_version: string }[]
-//     >`SHOW server_version;`;
-//     console.log(databaseVersionResult);
-//     console.log('Database connection established successfully.');
-//   } catch (error) {
-//     console.error('Error connecting to the database:', error);
-//     process.exit(1);
-//   }
-// }
-
-// checkDatabaseConnection();
 
 app.use(router);
 
