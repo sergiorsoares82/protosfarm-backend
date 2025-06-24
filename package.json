@@ -11,6 +11,7 @@
     "services:down": "docker compose -f src/infra/compose.yaml down",
     "test": "npm run services:up && concurrently --names express,jest --hide express --kill-others --success command-jest \"tsx src/server.ts\" \"jest --runInBand --verbose\"",
     "test:watch": "jest --watch --runInBand",
+    "posttest": "npm run services:stop",
     "migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
     "lint:eslint:check": "eslint .",
     "lint:eslint:fix": "eslint . --fix",
