@@ -1,23 +1,33 @@
 import { Request, Response } from 'express';
-import prisma from '../../../infra/database.js';
+import queries from '../../../infra/queries.js';
 
 const getStatus = async (req: Request, res: Response) => {
   const updatedAt = new Date();
 
-  const databaseVersionResult = await prisma.$queryRaw<
+  const databaseVersionResult = await queries.safeQueryRaw<
     { server_version: string }[]
   >`SHOW server_version;`;
 
-  const databaseOpenedConnections = await prisma.$queryRaw<
+  const databaseOpenedConnections = await queries.safeQueryRaw<
     { count: number }[]
   >`SELECT count(*) FROM pg_stat_activity WHERE state = 'active';`;
 
+  const databaseMaxConnections = await queries.safeQueryRaw<
+    { max_connections: string }[]
+  >`SHOW max_connections;`;
+
+  console.log(databaseMaxConnections);
+
   res.status(200).json({
     updated_at: updatedAt.toISOString(),
-    databaseVersion: databaseVersionResult[0]?.server_version || 'unknown',
-    databaseOpenedConnections:
-      parseInt(databaseOpenedConnections[0]?.count.toString()) || 0,
-    timestamp: new Date().toISOString(),
+    dependencies: {
+      database: {
+        version: databaseVersionResult[0]?.server_version || 'unknown',
+        opened_connections:
+          parseInt(databaseOpenedConnections[0]?.count.toString()) || 0,
+        max_connections: databaseMaxConnections[0].max_connections || 0,
+      },
+    },
   });
 };
 

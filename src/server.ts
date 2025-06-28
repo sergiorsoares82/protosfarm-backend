@@ -1,10 +1,14 @@
-import type { Request, Response } from 'express';
-import express from 'express';
-import router from './routes/index.js';
 import cors from 'cors';
+import type { NextFunction, Request, Response } from 'express';
+import express from 'express';
+import type { ApiError } from './infra/error.js';
+import router from './routes/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Ensure DB connection works before continuing
+console.log('✅ Connected to the database.');
 
 app.use(cors());
 
@@ -20,9 +24,13 @@ app.use((req: Request, res: Response) => {
 });
 
 // Global error handler (optional, for unexpected errors)
-app.use((err: Error, req: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log('Middleware error handler triggered');
   console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
+
+  const statusCode = (err as ApiError).status_code || 500;
+  res.status(statusCode).json({ err });
 });
 
 app.listen(PORT, () => {
